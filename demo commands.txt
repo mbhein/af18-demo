@@ -1,0 +1,7 @@
+set prod_properties_file=PROD_Customer_Environments.properties
+set uat_properties_file=UAT_Customer_Environments.properties
+set product=APP1
+echo %prod_properties_file%
+echo %uat_properties_file%
+echo %product%
+python demo_product_inventory_script.py

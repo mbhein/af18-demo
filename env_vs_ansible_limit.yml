@@ -1,0 +1,28 @@
+---
+
+
+- name: Set SFTP DS - When ansible_limit is section group
+  include_tasks: sftp.yml
+  vars:
+    client_vars: "{{ lookup('vars', ansible_limit + '_vars') }}"
+    app1_section: "{{ ansible_limit }}"
+  when: lookup('vars', ansible_limit + '_vars', default='') != ''
+  tags:
+    - sftp_dir_ds
+
+
+- name: Set SFTP DS - When ansible_limit is environment group
+  include_tasks: sftp.yml
+  vars:
+    client_vars: "{{ lookup('vars', group + '_vars') }}"
+    app1_section: "{{ group }}"
+  loop: "{{ group_names }}"
+  loop_control:
+      loop_var: group
+  when: lookup('vars', ansible_limit + '_vars', default='') == ''
+      and lookup('vars', group + '_vars', default='') != ''
+      and group is search("_app1")
+  tags:
+    - sftp_dir_ds
+    
+...

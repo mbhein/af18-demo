@@ -1,0 +1,76 @@
+{
+  "_meta": {
+    "hostvars": {}
+  },
+  "app1": {
+    "children": [
+      "all_saas_app1"
+    ]
+  },
+  "all_saas_app1": {
+    "children": [
+      "all_uat_saas_app1",
+      "all_prod_saas_app1"
+    ]
+  },
+  "all_prod_saas_app1": {
+    "children": [
+      "prod_client1_app1", 
+      "prod_client2_app1"
+    ]
+  }, 
+  "all_uat_saas_app1": {
+    "children": [
+      "uat_client1_app1", 
+      "uat_client2_app1"
+    ]
+  }, 
+  "prod_client1_app1": {
+    "hosts": [
+      "prodapp1s01", 
+      "prodapp1s02"
+    ], 
+    "vars": {
+      "prod_client1_app1_vars": {
+        "apphostport": "18080", 
+        "tomcathome": "/data/Client1_app1"
+      }
+    }
+  }, 
+  "prod_client2_app1": {
+    "hosts": [
+      "prodapp1s01", 
+      "prodapp1s02"
+    ], 
+    "vars": {
+      "prod_client2_app1_vars": {
+        "apphostport": "18090", 
+        "tomcathome": "/data/Client2_app1"
+      }
+    }
+  }, 
+  "uat_client1_app1": {
+    "hosts": [
+      "uatapp1s01", 
+      "uatapp1s02"
+    ], 
+    "vars": {
+      "uat_client1_app1_vars": {
+        "apphostport": "18080", 
+        "tomcathome": "/data/Client1_app1"
+      }
+    }
+  }, 
+  "uat_client2_app1": {
+    "hosts": [
+      "uatapp1s01", 
+      "uatapp1s02"
+    ], 
+    "vars": {
+      "uat_client2_app1_vars": {
+        "apphostport": "18090", 
+        "tomcathome": "/data/Client2_app1"
+      }
+    }
+  }
+}
