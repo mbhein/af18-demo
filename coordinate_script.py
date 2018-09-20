@@ -89,7 +89,7 @@ class getProps(object):
         except ConfigParser.Error:
             self.appHostPort  = ''
 
-        logger.info('servers'.ljust(msgFiller,' ') + '= ' + self.servers)
+        logger.info('servers'.ljust(msgFiller,' ') + '= ' + str(self.servers))
         logger.debug('tomcatHome'.ljust(msgFiller,' ') + '= ' + self.tomcatHome)
         logger.debug('appHostPort'.ljust(msgFiller,' ') + '= ' + self.appHostPort)
 
