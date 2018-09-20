@@ -77,7 +77,7 @@ class getProps(object):
         CustEnvPropsFName = self.workspace + '/' + self.custEnvProps
         logger.debug('CustEnv Properties'.ljust(msgFiller, ' ') + '= ' + CustEnvPropsFName)
         cp1.read(CustEnvPropsFName)
-        self.servers = cp1.get(self.CustomerEnvironment, 'servers')
+        self.servers = cp1.get(self.CustomerEnvironment, 'servers').split(',')
 
         try:
             self.tomcatHome = cp1.get(self.CustomerEnvironment, 'tomcatHome')
