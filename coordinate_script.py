@@ -77,7 +77,7 @@ class getProps(object):
         CustEnvPropsFName = self.workspace + '/' + self.custEnvProps
         logger.debug('CustEnv Properties'.ljust(msgFiller, ' ') + '= ' + CustEnvPropsFName)
         cp1.read(CustEnvPropsFName)
-        self.stagingServers = cp1.get(self.CustomerEnvironment, 'stagingServers')
+        self.servers = cp1.get(self.CustomerEnvironment, 'servers')
 
         try:
             self.tomcatHome = cp1.get(self.CustomerEnvironment, 'tomcatHome')
@@ -89,7 +89,7 @@ class getProps(object):
         except ConfigParser.Error:
             self.appHostPort  = ''
 
-        logger.info('stagingServers'.ljust(msgFiller,' ') + '= ' + self.stagingServers)
+        logger.info('servers'.ljust(msgFiller,' ') + '= ' + self.servers)
         logger.debug('tomcatHome'.ljust(msgFiller,' ') + '= ' + self.tomcatHome)
         logger.debug('appHostPort'.ljust(msgFiller,' ') + '= ' + self.appHostPort)
 
@@ -173,7 +173,7 @@ def main():
     props.logfilelist = []
     msgProduct = appProduct
 
-    for singleserver in props.stagingServers:
+    for singleserver in props.servers:
         logger.info(' ')
 
         t = threading.Thread(target=appDeploy, args=(singleserver,))
