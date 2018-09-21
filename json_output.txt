@@ -1,7 +1,7 @@
 {
   "_meta": {
     "hostvars": {}
-  },
+  }, 
   "app1": {
     "children": [
       "all_saas_app1"
@@ -33,7 +33,8 @@
     "vars": {
       "prod_client1_app1_vars": {
         "apphostport": "18080", 
-        "tomcathome": "/data/Client1_app1"
+        "clienthome": "Client1_app1", 
+        "servicehostport": "18087"
       }
     }
   }, 
@@ -45,7 +46,8 @@
     "vars": {
       "prod_client2_app1_vars": {
         "apphostport": "18090", 
-        "tomcathome": "/data/Client2_app1"
+        "clienthome": "Client2_app1", 
+        "servicehostport": "18097"
       }
     }
   }, 
@@ -57,7 +59,8 @@
     "vars": {
       "uat_client1_app1_vars": {
         "apphostport": "18080", 
-        "tomcathome": "/data/Client1_app1"
+        "servicehostport": "18087", 
+        "tomcathome": "Client1_app1"
       }
     }
   }, 
@@ -69,7 +72,8 @@
     "vars": {
       "uat_client2_app1_vars": {
         "apphostport": "18090", 
-        "tomcathome": "/data/Client2_app1"
+        "servicehostport": "18097", 
+        "tomcathome": "Client2_app1"
       }
     }
   }
