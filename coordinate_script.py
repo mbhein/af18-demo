@@ -33,7 +33,7 @@ class getProps(object):
         self.nodeName = os.environ.get('NODE_NAME')
         self.workspace = os.environ.get('WORKSPACE')
         self.jobname = os.environ.get('JOB_NAME')
-        self.ops_env = self.jobname.split("_")[0].lower()
+        self.ops_env = self.jobname.split("_")[0]
         self.CustomerEnvironment = os.environ.get('Customer_Environment')
         self.custEnvProps = os.environ.get('Customer_Environment_Properties')
 
@@ -74,7 +74,7 @@ class getProps(object):
         #  Specific Server Properties for the Customer Environment(TSM/UAT/PROD)
         # -----------------------------------------------------------------------------------------
         cp1 = ConfigParser.ConfigParser()
-        CustEnvPropsFName = self.workspace + '/' + self.custEnvProps
+        CustEnvPropsFName = self.workspace + '/' + self.ops_env + '_Customer_Environments.properties'
         logger.debug('CustEnv Properties'.ljust(msgFiller, ' ') + '= ' + CustEnvPropsFName)
         cp1.read(CustEnvPropsFName)
         self.servers = cp1.get(self.CustomerEnvironment, 'servers').split(',')
