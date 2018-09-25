@@ -33,9 +33,9 @@ class getProps(object):
         self.nodeName = os.environ.get('NODE_NAME')
         self.workspace = os.environ.get('WORKSPACE')
         self.jobname = os.environ.get('JOB_NAME')
-        self.ops_env = self.jobname.split("_")[0].lower()
+        self.ops_env = self.jobname.split("_")[0]
         self.CustomerEnvironment = os.environ.get('Customer_Environment')
-        self.custEnvProps = os.environ.get('Customer_Environment_Properties')
+        self.custEnvProps = self.ops_env + '_Customer_Environments.properties'
 
 
         #Deploy Parameters
