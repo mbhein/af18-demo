@@ -40,21 +40,22 @@ class EnvProps(object):
         self.customer_grouping = ''
         self.environment_group = ''
 
-        self.config = ConfigParser.RawConfigParser()
+        self.config = ConfigParser.ConfigParser()
+        self.config.optionxform = str
         self.config.read(properties_file)
 
         self.product = product
         self.product_groups = {}
         self.product_group_props = {}
 
-        self.environment = re.split(r'[/\\]', properties_file)[-1].lower().split("_")[0]
+        self.environment = re.split(r'[/\\]', properties_file)[-1].split("_")[0]
         self.environment_hierarchy = {}
 
     def set_environment_group(self):
-        self.environment_group = "all_{}_{}_{}".format(self.environment, self.customer_grouping, self.product.lower())
+        self.environment_group = "ALL_{}_{}_{}".format(self.environment, self.customer_grouping, self.product)
 
     def get_product_groups(self):
-        self.product_groups[self.environment_group] = {"children": [_section.lower() for _section in self.sections]}
+        self.product_groups[self.environment_group] = {"children": [_section for _section in self.sections]}
         return self.product_groups
 
     def get_product_group_props(self):
@@ -74,10 +75,10 @@ class EnvProps(object):
                 if option != hosts_option:
                     _section_vars[option] = self.config.get(_section, option)
             if product == 'APP1':
-                _temp = _section.lower() + "_vars"
+                _temp = _section + "_vars"
                 _section_vars = {_temp: _section_vars}
 
-            self.product_group_props[_section.lower()] = {"hosts": _section_hosts, "vars": _section_vars}
+            self.product_group_props[_section] = {"hosts": _section_hosts, "vars": _section_vars}
 
         return self.product_group_props
 
@@ -89,7 +90,7 @@ class SaaSEnvProps(EnvProps):
 
     def __init__(self, properties_file):
         EnvProps.__init__(self, properties_file)
-        self.customer_grouping = 'saas'
+        self.customer_grouping = 'SAAS'
         self.set_environment_group()
 
         _sections = self.config.sections()
@@ -118,8 +119,8 @@ def customer_grouping_children(customer_grouping, property_files):
     #  customer_grouping_children - return all children of a product in a supplied customer group for all
     #   property files supplied
     # ---------------------------------------------------------------------------------------------------
-    children = ["all_{}_{}_{}".format(env, customer_grouping, product.lower())
-                for env in (re.split(r'[/\\]', f)[-1].lower().split("_")[0] for f in property_files)]
+    children = ["ALL_{}_{}_{}".format(env, customer_grouping, product)
+                for env in (re.split(r'[/\\]', f)[-1].split("_")[0] for f in property_files)]
     return children
 
 
@@ -170,9 +171,9 @@ def main():
     if args.list:
 
         # Process SaaS environments
-        saas_product = "all_saas_" + product.lower()
+        saas_product = "ALL_SAAS_" + product
         product_children.append(saas_product)
-        product_hierarchy[saas_product] = {"children": customer_grouping_children('saas', property_files)}
+        product_hierarchy[saas_product] = {"children": customer_grouping_children('SAAS', property_files)}
 
         for property_file in property_files:
             saas = SaaSEnvProps(property_file)
@@ -184,7 +185,7 @@ def main():
             inventory.update(saas.get_product_group_props())
 
         # Add product's children hierarchy
-        product_hierarchy[product.lower()] = {"children": product_children}
+        product_hierarchy[product] = {"children": product_children}
         inventory.update(product_hierarchy)
 
         # Add meta to prevent Tower from invoking --host for each host:
