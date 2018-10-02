@@ -58,17 +58,17 @@ class getProps(object):
         # -----------------------------------------------------------------------------------------
         #  Global Environment Properties (parameters that are common to all environments)
         # -----------------------------------------------------------------------------------------
-        cp = ConfigParser.ConfigParser()
-        coordinatePropsFName = self.workspace + '/Coordinate.properties'
-        logger.debug('Coordinate_Properties'.ljust(msgFiller, ' ') + '= ' + coordinatePropsFName)
-        cp.read(coordinatePropsFName)
-
-        self.mailhost = cp.get('main', 'mailhost')
-
-        # Print Global Properties Main
-        logger.debug('mailhost'.ljust(msgFiller,' ') + '= ' + self.mailhost)
-        logger.debug('custEnvProps'.ljust(msgFiller,' ') + '= ' + self.custEnvProps)
-        logger.info('appProduct'.ljust(msgFiller,' ') + '= ' + appProduct)
+        # cp = ConfigParser.ConfigParser()
+        # coordinatePropsFName = self.workspace + '/Coordinate.properties'
+        # logger.debug('Coordinate_Properties'.ljust(msgFiller, ' ') + '= ' + coordinatePropsFName)
+        # cp.read(coordinatePropsFName)
+        #
+        # self.mailhost = cp.get('main', 'mailhost')
+        #
+        # # Print Global Properties Main
+        # logger.debug('mailhost'.ljust(msgFiller,' ') + '= ' + self.mailhost)
+        # logger.debug('custEnvProps'.ljust(msgFiller,' ') + '= ' + self.custEnvProps)
+        # logger.info('appProduct'.ljust(msgFiller,' ') + '= ' + appProduct)
 
         # -----------------------------------------------------------------------------------------
         #  Specific Server Properties for the Customer Environment(TSM/UAT/PROD)
