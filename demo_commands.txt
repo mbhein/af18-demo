@@ -1,0 +1,19 @@
+#Run the following for your OS to set the environment variables needed to run the demo_product_inventory_script.py
+
+#Nix
+export prod_properties_file=PROD_Customer_Environments.properties
+export uat_properties_file=UAT_Customer_Environments.properties
+export product=APP1
+echo $prod_properties_file
+echo $uat_properties_file
+echo $product
+python demo_product_inventory_script.py
+
+#Windows
+set prod_properties_file=PROD_Customer_Environments.properties
+set uat_properties_file=UAT_Customer_Environments.properties
+set product=APP1
+echo %prod_properties_file%
+echo %uat_properties_file%
+echo %product%
+python demo_product_inventory_script.py
